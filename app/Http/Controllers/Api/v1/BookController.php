@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\v1;
 
 use Exception;
 use App\Models\Book;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use App\Http\Requests\SaveBookRequest;
+use App\Http\Controllers\Api\Controller;
 
 class BookController extends Controller
 {
@@ -42,14 +44,14 @@ class BookController extends Controller
         return response()->json(['success' => true, 'data' => $book]);
     }
 
-    public function store(Request $request)
+    public function store(SaveBookRequest $request)
     {
         $book = Book::create($request->all());
 
         return response()->json(['success' => true, 'message' => 'Libro creado con éxito', 'data' => $book]);
     }
 
-    public function update(Request $request, $id)
+    public function update(SaveBookRequest $request, $id)
     {
         $book = Book::find($id);
 
